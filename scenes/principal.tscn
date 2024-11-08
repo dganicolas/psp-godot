@@ -7,9 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://bl53gpvg5mh1y" path="res://tilesets/slime_green.png" id="5_jydgx"]
 [ext_resource type="Texture2D" uid="uid://bwoec51f6mei0" path="res://tilesets/slime_purple.png" id="6_x6523"]
 [ext_resource type="Texture2D" uid="uid://d0q2g65ahgok" path="res://tilesets/world_tileset.png" id="7_i65p5"]
-[ext_resource type="Script" path="res://scripts/CharacterBody2d.cs" id="8_hfv8u"]
-[ext_resource type="Script" path="res://scripts/enemigo.cs" id="9_tcb7p"]
-[ext_resource type="Script" path="res://scripts/killzone.cs" id="10_u1vfs"]
+[ext_resource type="Script" path="res://scripts/Player.cs" id="8_hfv8u"]
+[ext_resource type="Script" path="res://scripts/Enemigo.cs" id="9_tcb7p"]
+[ext_resource type="Script" path="res://scripts/Killzone.cs" id="10_u1vfs"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_p52r1"]
 
@@ -752,13 +752,13 @@ tile_map_data = PackedByteArray("AAD+////AwAAAAAAAAABAP//AwAAAAAAAAD9////AwAAAAA
 tile_set = SubResource("TileSet_14hvq")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-visibility_layer = 9
+visibility_layer = 12
 position = Vector2(0, -42)
 collision_mask = 14
 script = ExtResource("8_hfv8u")
 Speed = 150.0
 JumpVelocity = -300.0
-speedBullet = 400.0
+speedBullet = 50.0
 ammo = 50
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
@@ -773,6 +773,7 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+visibility_layer = 12
 position = Vector2(0, 19)
 shape = SubResource("CapsuleShape2D_emoaq")
 
@@ -787,12 +788,14 @@ frame_progress = 0.432822
 
 [node name="Area2Dene" type="Area2D" parent="enemigo"]
 light_mask = 4
-visibility_layer = 21
+visibility_layer = 29
 collision_layer = 4
-collision_mask = 21
+collision_mask = 29
 script = ExtResource("9_tcb7p")
 
 [node name="CollisionShape2Dene" type="CollisionShape2D" parent="enemigo/Area2Dene"]
+light_mask = 4
+visibility_layer = 21
 position = Vector2(0, 5.5)
 shape = SubResource("RectangleShape2D_rt1wi")
 
@@ -810,5 +813,6 @@ visibility_layer = 5
 position = Vector2(29, -32)
 shape = SubResource("WorldBoundaryShape2D_yr5pb")
 
+[connection signal="area_entered" from="enemigo/Area2Dene" to="enemigo/Area2Dene" method="OnBodyEnteredBullet"]
 [connection signal="body_entered" from="enemigo/Area2Dene" to="enemigo/Area2Dene" method="OnBodyEntered"]
 [connection signal="body_entered" from="killzone" to="killzone" method="OnBodyEnteredKillzone"]
