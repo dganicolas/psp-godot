@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cibnkf2k6avak"]
+
+[ext_resource type="Texture2D" uid="uid://gx1xihdbejvu" path="res://tilesets/fruit.png" id="1_606fr"]
+[ext_resource type="Script" path="res://scripts/Bullet.cs" id="1_kd706"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32dgt"]
+atlas = ExtResource("1_606fr")
+region = Rect2(2, 2, 11, 13)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iue47"]
+radius = 4.0
+
+[node name="Bullet" type="Area2D"]
+light_mask = 16
+visibility_layer = 21
+collision_layer = 16
+collision_mask = 5
+script = ExtResource("1_kd706")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_32dgt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.25, 1)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_iue47")
