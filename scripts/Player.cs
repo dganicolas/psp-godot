@@ -42,7 +42,8 @@ public partial class Player : CharacterBody2D
 		{
 				Bullet instBullet = (Bullet) bullet.Instantiate();
 				instBullet.Position = new Vector2(0,19);
-				instBullet.speedBullet = this.speedBullet;
+				instBullet.RotationDegrees = this.RotationDegrees;
+				instBullet.speedBullet = animation.FlipH ? -speedBullet : speedBullet;
 				AddChild(instBullet);
 		}
 		

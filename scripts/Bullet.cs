@@ -15,7 +15,11 @@ public partial class Bullet : Area2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		Position += new  Vector2(speedBullet * (float) delta, 0.0f);
+		if(RotationDegrees == 0){
+			Position += new  Vector2(speedBullet * (float) delta, 0.0f);
+		}else{
+			Position -= new  Vector2(speedBullet * (float) delta, 0.0f);
+		}
 	}
 	
 	
