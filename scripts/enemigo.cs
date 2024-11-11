@@ -5,6 +5,7 @@ public partial class Enemigo : Area2D
 {
 	private Sprite2D _sprite;
 	// Called when the node enters the scene tree for the first time.
+	//toma de contacto
 	public override void _Ready()
 	{	
 	}
@@ -16,7 +17,6 @@ public partial class Enemigo : Area2D
 	
 	public void OnBodyEnteredBullet(Area2D body){
 		GD.Print(body.Name);
-			this.Hide();
 			body.Hide();
 	}
 }

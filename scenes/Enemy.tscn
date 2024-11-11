@@ -102,10 +102,11 @@ size = Vector2(14, 13)
 light_mask = 4
 visibility_layer = 17
 texture_filter = 1
-position = Vector2(57, -26)
+position = Vector2(1, 0)
 sprite_frames = SubResource("SpriteFrames_3354l")
 autoplay = "default"
 frame_progress = 0.432822
+offset = Vector2(0, -5.385)
 
 [node name="Area2Dene" type="Area2D" parent="."]
 light_mask = 4
@@ -117,7 +118,6 @@ script = ExtResource("2_nw321")
 [node name="CollisionShape2Dene" type="CollisionShape2D" parent="Area2Dene"]
 light_mask = 4
 visibility_layer = 21
-position = Vector2(0, 5.5)
 shape = SubResource("RectangleShape2D_rt1wi")
 
 [connection signal="area_entered" from="Area2Dene" to="Area2Dene" method="OnBodyEnteredBullet"]
