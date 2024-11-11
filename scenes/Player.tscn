@@ -110,7 +110,7 @@ region = Rect2(224, 96, 32, 32)
 [sub_resource type="SpriteFrames" id="SpriteFrames_nvcvm"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 1.5,
 "texture": SubResource("AtlasTexture_hlrmk")
 }, {
 "duration": 1.0,
@@ -127,7 +127,7 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 1.5,
 "texture": SubResource("AtlasTexture_orljj")
 }, {
 "duration": 1.0,
@@ -200,7 +200,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk",
-"speed": 5.0
+"speed": 7.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_emoaq"]
@@ -219,13 +219,13 @@ ammo = 50
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, 8)
-zoom = Vector2(7, 7)
+zoom = Vector2(4, 4)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, 15)
 sprite_frames = SubResource("SpriteFrames_nvcvm")
-animation = &"idle"
+animation = &"jump"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

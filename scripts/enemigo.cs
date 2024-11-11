@@ -16,7 +16,7 @@ public partial class Enemigo : Area2D
 	}
 	
 	public void OnBodyEnteredBullet(Area2D body){
-		GD.Print(body.Name);
-			body.Hide();
+		GetParent().QueueFree();
+		body.QueueFree();
 	}
 }

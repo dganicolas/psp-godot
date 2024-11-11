@@ -303,6 +303,7 @@ texture = ExtResource("6_x6523")
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gsb01"]
 texture = ExtResource("7_i65p5")
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -4, -8, -4)
 1:0/0 = 0
 2:0/0 = 0
 3:0/0 = 0
@@ -432,7 +433,7 @@ texture = ExtResource("7_i65p5")
 
 [sub_resource type="TileSet" id="TileSet_14hvq"]
 physics_layer_0/collision_layer = 2
-physics_layer_0/collision_mask = 2
+physics_layer_0/collision_mask = 3
 physics_layer_0/physics_material = SubResource("PhysicsMaterial_p52r1")
 sources/0 = SubResource("TileSetAtlasSource_50014")
 sources/1 = SubResource("TileSetAtlasSource_5t2ud")
@@ -445,13 +446,21 @@ sources/6 = SubResource("TileSetAtlasSource_gsb01")
 [node name="Principal" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
+light_mask = 2
+visibility_layer = 31
 texture_filter = 1
-position = Vector2(0, 2)
-tile_map_data = PackedByteArray("AAD+////AwAAAAAAAAABAP//AwAAAAAAAAD9////AwAAAAAAAAACAP//AwAAAAAAAAADAP//AwAAAAAAAAAEAP//AwAAAAAAAAD7////AwAAAAAAAAD8////AwAAAAAAAAD7//7/AwAAAAAAAAD7//3/AwAAAAAAAAD7//z/AwAAAAAAAAD7//v/AwAAAAAAAAD7//r/AwAAAAAAAAD7//n/AwAAAAAAAAD7//j/AwAAAAAAAAD7//f/AwAAAAAAAAD7//b/AwAAAAAAAAD/////AwAAAAAAAAAAAP//AwAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAD/////BgAAAAAAAAAAAP//BgAAAAAAAAABAP//BgAAAAAAAAACAP//BgAAAAAAAAADAP//BgAAAAAAAAAEAP//BgAAAAAAAAAFAP//BgAAAAAAAAAGAP//BgAAAAAAAAAHAP//BgAAAAAAAAD//wAABgAAAAEAAAAAAAAABgAAAAEAAAABAAAABgAAAAEAAAACAAAABgAAAAEAAAADAAAABgAAAAEAAAAEAAAABgAAAAEAAAAFAAAABgAAAAEAAAAGAAAABgAAAAEAAAAHAAAABgAAAAEAAAD//wEABgAAAAEAAAAAAAEABgAAAAEAAAABAAEABgAAAAEAAAACAAEABgAAAAEAAAADAAEABgAAAAEAAAAEAAEABgAAAAEAAAAFAAEABgAAAAEAAAAGAAEABgAAAAEAAAAHAAEABgAAAAEAAAD///3/BgAAAAAAAAD+////AwAAAAAAAAD9////AwAAAAAAAAD7////AwAAAAAAAAD8////AwAAAAAAAAA=")
 tile_set = SubResource("TileSet_14hvq")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("8_c2ygu")]
+position = Vector2(8, -37)
+scale = Vector2(0.8, 0.8)
+up_direction = Vector2(0, 1)
+Speed = 50.0
+speedBullet = 180.0
 
 [node name="enemigo" parent="." instance=ExtResource("9_vw721")]
+position = Vector2(26, -20)
 
 [node name="killzone" parent="." instance=ExtResource("10_mmnda")]
+position = Vector2(0, 24)
