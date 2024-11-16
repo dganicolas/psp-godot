@@ -209,7 +209,7 @@ height = 16.0
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 visibility_layer = 12
-position = Vector2(0, -42)
+position = Vector2(-1, -9)
 collision_mask = 14
 script = ExtResource("1_codhe")
 Speed = 150.0
@@ -218,6 +218,7 @@ speedBullet = 50.0
 ammo = 50
 
 [node name="Camera2D" type="Camera2D" parent="."]
+visibility_layer = 15
 position = Vector2(0, 8)
 zoom = Vector2(4, 4)
 
@@ -225,10 +226,11 @@ zoom = Vector2(4, 4)
 texture_filter = 1
 position = Vector2(0, 15)
 sprite_frames = SubResource("SpriteFrames_nvcvm")
-animation = &"jump"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visibility_layer = 12
+visibility_layer = 14
+texture_filter = 1
 position = Vector2(0, 19)
 shape = SubResource("CapsuleShape2D_emoaq")

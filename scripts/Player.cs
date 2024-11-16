@@ -22,6 +22,9 @@ public partial class Player : CharacterBody2D
 	}
 	public override void _PhysicsProcess(double delta)
 	{
+
+		
+
 		Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 		Vector2 velocity = Velocity;
 		// Add the gravity.
