@@ -3,6 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://bwoec51f6mei0" path="res://tilesets/slime_purple.png" id="1_nxbab"]
 [ext_resource type="Script" path="res://scripts/Enemigo.cs" id="2_nw321"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rt1wi"]
+size = Vector2(14, 13)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_kf6lp"]
 atlas = ExtResource("1_nxbab")
 region = Rect2(0, 0, 24, 24)
@@ -95,10 +98,21 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rt1wi"]
-size = Vector2(14, 13)
+[node name="Area2Dene" type="Area2D"]
+light_mask = 4
+visibility_layer = 29
+collision_layer = 4
+collision_mask = 29
+script = ExtResource("2_nw321")
 
-[node name="enemigo" type="AnimatedSprite2D"]
+[node name="cuerpo" type="CollisionShape2D" parent="."]
+light_mask = 4
+visibility_layer = 21
+shape = SubResource("RectangleShape2D_rt1wi")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="enemigo" type="AnimatedSprite2D" parent="."]
 light_mask = 4
 visibility_layer = 17
 texture_filter = 1
@@ -108,17 +122,5 @@ autoplay = "default"
 frame_progress = 0.432822
 offset = Vector2(0, -5.385)
 
-[node name="Area2Dene" type="Area2D" parent="."]
-light_mask = 4
-visibility_layer = 29
-collision_layer = 4
-collision_mask = 29
-script = ExtResource("2_nw321")
-
-[node name="CollisionShape2Dene" type="CollisionShape2D" parent="Area2Dene"]
-light_mask = 4
-visibility_layer = 21
-shape = SubResource("RectangleShape2D_rt1wi")
-
-[connection signal="area_entered" from="Area2Dene" to="Area2Dene" method="OnBodyEnteredBullet"]
-[connection signal="body_entered" from="Area2Dene" to="Area2Dene" method="OnBodyEntered"]
+[connection signal="area_entered" from="." to="." method="OnBodyEnteredBullet"]
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
