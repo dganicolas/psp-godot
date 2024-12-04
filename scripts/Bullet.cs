@@ -39,6 +39,11 @@ public partial class Bullet : Area2D
 		}
 	}
 	
+	public void OnBodyEnteredPlayer(Player body){
+		body.recibirDano(1);
+		this.QueueFree();
+	}
+	
 	private void OnTimeout()
 	{
 		GD.Print("La bala ha sido eliminada por el tiempo.");

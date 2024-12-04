@@ -15,7 +15,7 @@ public partial class LevelManager : Node
 		RouteScene = scenePath;
 		if (currentScene != null)
 		{
-			currentScene. CallDeferred("queue_free");; // Limpia la escena actual.
+			currentScene.CallDeferred("queue_free");; // Limpia la escena actual.
 		}
 
 		var nextScene = GD.Load<PackedScene>(scenePath);

@@ -4,10 +4,12 @@ using System.Collections.Generic;
 
 public partial class Juego : Node2D
 {
+	//que sea jugable y que tenga un menu
+		private Timer timer;
 		private LevelManager levelManager; // Referencia al LevelManager.
 		private Player playerBackup;
 		private Player player;
-		private Random random = new Random();
+		private int nivelActual = 0;
 		private TextEdit texto;
 		private Dictionary<string, string> levelPaths = new Dictionary<string, string>
 	{
@@ -17,11 +19,16 @@ public partial class Juego : Node2D
 		{ "level3", "res://scenes/levels/level3.tscn" },
 		{ "level4", "res://scenes/levels/level4.tscn" },
 		{ "level5", "res://scenes/levels/level5.tscn" },
-		{ "boss", "res://scenes/levels/boss.tscn" }
+		{ "level6", "res://scenes/levels/boss.tscn" }
 	};
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		timer = new Timer();
+		timer.WaitTime = 1.0f;
+		timer.OneShot = true;
+		timer.Timeout += OnTimerTimeout;
+		AddChild(timer);
 		levelManager = GetTree().Root.GetNode<LevelManager>("/root/Juego/LevelManager");
 		player = GetTree().Root.GetNode<Player>("/root/Juego/CharacterBody2D");
 		texto = GetTree().Root.GetNode<TextEdit>("/root/Juego/TextEdit");
@@ -32,13 +39,11 @@ public partial class Juego : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if(player.vida == 0) ReloadSceneWhitDead();
+		if(player.vida == 0) ReloadScene();
 	}
 	private void ReloadPlayer(){
-		player.QueueFree();
-		player = playerBackup.ClonePlayer();
-		GetTree().Root.CallDeferred("add_child", player);
-		player.GlobalPosition = new Vector2(-57,-19);
+	playerBackup.ReloadPlayer(player);
+	player.GlobalPosition = new Vector2(-57, -19);
 	}
 	
 	public void LoadScene(string scenePath){
@@ -49,26 +54,23 @@ public partial class Juego : Node2D
 	}
 	
 	public void changeScene(String nivel){
-		if(nivel != "random"){
-			playerBackup = player.ClonePlayer();
-			LoadScene(levelPaths[nivel]);
+		if(nivel =="salir"){
+			var nextScene = ResourceLoader.Load<PackedScene>("res://scenes/despedida.tscn");
+		GetTree().ChangeSceneToPacked(nextScene);
 		}else{
-			loadSceneRamdonLevel();
+			LoadScene(levelPaths[nivel]);
 		}
+			
 	}
 	
-	public void loadSceneRamdonLevel(){
-		int randomLevel = random.Next(1, 6);
-		LoadScene(levelPaths[$"level{randomLevel}"]);
-	}
-	
-	public void ReloadSceneWhitDead(){
-		texto.Visible =true;
-		ReloadPlayer();
-		levelManager.LoadScene(levelPaths["lobby"]);;
+	private void OnTimerTimeout()
+	{
+		texto.Visible = false;
 	}
 	
 	public void ReloadScene(){
+		texto.Visible =true;
+		timer.Start();
 		levelManager.ReloadScene();
 		ReloadPlayer();
 		

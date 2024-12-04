@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://ne5b3c3e8pq7"]
 
-[ext_resource type="Script" path="res://scenes/entity/Portal.cs" id="1_r0wgv"]
+[ext_resource type="Script" path="res://scripts/Portal.cs" id="1_r0wgv"]
 [ext_resource type="Texture2D" uid="uid://4kxcg6kqo2nw" path="res://tilesets/spritesheet_32x32.png" id="1_td5b8"]
 [ext_resource type="Texture2D" uid="uid://d3g53erwjafpd" path="res://tilesets/pixil-frame-0.png" id="2_c27i7"]
 

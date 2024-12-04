@@ -14,48 +14,103 @@ public partial class Player : CharacterBody2D
 	[Export] 
 	public int vida;
 	[Export]
-	public int vidaMax;
+	public int monedas  { get; set; }
 
-	
+	public AnimatedSprite2D powerUps;
 	public AnimatedSprite2D animation;
-	private Label texto;
+	private Label textammo;
+	private Label texthealth;
+	private Label textmonedas;
 	private PackedScene bullet;
 
 	public override void _Ready(){
-		vida = vidaMax;
 		animation = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		bullet = GD.Load<PackedScene>("res://scenes/entity/bullet.tscn");
-		texto = GetNode<Label>("wammo");
-		
-		UpdateAmmoDisplay();
+		textammo = GetNode<Label>("HUD/ammoSprite/ammo");
+		texthealth = GetNode<Label>("HUD/healthSprite/health");
+		textmonedas = GetNode<Label>("HUD/monedasSprite/monedas");
+		powerUps = GetNode<AnimatedSprite2D>("HUD/Sprite2D");
+		updateAmmoDisplay();
+		updateHeatlhDisplay();
+		updateMonedasDisplay();
 	}
 	
-	private void UpdateAmmoDisplay()
+	private void updateMonedasDisplay()
 	{
-		texto.Text = "Ammo: " + ammo.ToString();
+		textmonedas.Text = monedas.ToString();
+	}
+	
+	
+	private void updateAmmoDisplay()
+	{
+		textammo.Text = ammo.ToString();
+	}
+	private void updateHeatlhDisplay(){
+		texthealth.Text = vida.ToString();
 	}
 	
 	public void recibirDano(int dano)
 	{
-		GD.Print(vida);
 		vida -= dano;
 		if(vida < 0) vida = 0;
+		updateHeatlhDisplay();
+		
 	}
 	
-	public Player ClonePlayer()
+	public void ReloadPlayer(Player clone)
 	{
-		// Crea una nueva instancia y copia los valores
-		Player clone = (Player)GD.Load<PackedScene>("res://scenes/entity/Player.tscn").Instantiate();
 		clone.Speed = this.Speed;
 		clone.JumpVelocity = this.JumpVelocity;
 		clone.speedBullet = this.speedBullet;
 		clone.ammo = this.ammo;
+		clone.vida = this.vida;
+		clone.monedas = this.monedas;
 		clone.Position = this.Position;
-		return clone;
+		clone.powerUps.Play("defecto");
+		
+	}
+	
+	public Player ClonePlayer()
+	{
+	Player clone = (Player)GD.Load<PackedScene>("res://scenes/entity/Player.tscn").Instantiate();
+	clone.Speed = this.Speed;
+	clone.JumpVelocity = this.JumpVelocity;
+	clone.speedBullet = this.speedBullet;
+	clone.ammo = this.ammo;
+	clone.vida = this.vida;
+	clone.monedas = this.monedas;
+	clone.Position = this.Position;
+	
+	if (clone.animation != null && this.animation != null)
+	{
+		clone.animation.Play(this.animation.Animation);
+		clone.animation.FlipH = this.animation.FlipH;
+	}
+	
+	if (clone.textammo != null && this.textammo != null)
+		clone.textammo.Text = this.textammo.Text;
+		
+	if (clone.texthealth != null && this.texthealth != null)
+		clone.texthealth.Text = this.texthealth.Text;
+		
+	if (clone.textmonedas != null && this.textmonedas != null)
+		clone.textmonedas.Text = this.textmonedas.Text;
+	return clone;
+	}
+	
+	public void recibirDinero(int cantidad){
+		monedas += cantidad;
+	}
+	
+	public void recibirBalas(int cantidad){
+		ammo += cantidad;
 	}
 	
 	public override void _PhysicsProcess(double delta)
 	{
+		updateAmmoDisplay();
+		updateHeatlhDisplay();
+		updateMonedasDisplay();
 		Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 		Vector2 velocity = Velocity;
 		// Add the gravity.
@@ -71,6 +126,7 @@ public partial class Player : CharacterBody2D
 		if (Input.IsActionJustPressed("ui_up") && IsOnFloor())
 		{
 			velocity.Y = JumpVelocity;
+			GD.Print(JumpVelocity);
 		}
 
 		
@@ -78,7 +134,7 @@ public partial class Player : CharacterBody2D
 		{
 				if(ammo > 0){
 					Bullet instBullet = (Bullet) bullet.Instantiate();
-					instBullet.Position = this.GlobalPosition + new Vector2(0, 15);
+					instBullet.Position = this.GlobalPosition + new Vector2(10, 15);
 					instBullet.RotationDegrees = animation.FlipH ? 180 : 0;
 					instBullet.speedBullet = animation.FlipH ? -speedBullet : speedBullet;
 					GetParent().AddChild(instBullet);
@@ -88,7 +144,7 @@ public partial class Player : CharacterBody2D
 				}else{
 					GD.Print("no ammo");
 				}
-				UpdateAmmoDisplay();
+				updateAmmoDisplay();
 		}
 		
 		// Get the input direction and handle the movement/deceleration.

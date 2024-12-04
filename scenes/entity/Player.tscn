@@ -1,7 +1,10 @@
-[gd_scene load_steps=40 format=3 uid="uid://cv1tcw7e84gs2"]
+[gd_scene load_steps=48 format=3 uid="uid://cv1tcw7e84gs2"]
 
 [ext_resource type="Script" path="res://scripts/Player.cs" id="1_codhe"]
 [ext_resource type="Texture2D" uid="uid://b8cmjj8vq3r8d" path="res://tilesets/knight.png" id="2_wbft5"]
+[ext_resource type="Texture2D" uid="uid://domltuoxfs3tt" path="res://tilesets/Heart&ManaUi.png" id="3_y2ukn"]
+[ext_resource type="Texture2D" uid="uid://4kxcg6kqo2nw" path="res://tilesets/spritesheet_32x32.png" id="4_8wy13"]
+[ext_resource type="Texture2D" uid="uid://bped01tsjeycn" path="res://tilesets/coin.png" id="4_cnevs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gi2v0"]
 atlas = ExtResource("2_wbft5")
@@ -280,18 +283,53 @@ animations = [{
 radius = 5.0
 height = 16.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmier"]
+atlas = ExtResource("3_y2ukn")
+region = Rect2(21, 2, 11, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6e4bk"]
+atlas = ExtResource("4_cnevs")
+region = Rect2(99, 3, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c51x8"]
+atlas = ExtResource("4_8wy13")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v85gb"]
+atlas = ExtResource("4_8wy13")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_killp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"defecto",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v85gb")
+}],
+"loop": true,
+"name": &"supersalto",
+"speed": 5.0
+}]
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
-visibility_layer = 12
+visibility_layer = 28
+z_index = 2
 position = Vector2(-1, -9)
-scale = Vector2(0.7, 0.7)
-collision_mask = 14
+scale = Vector2(0.9, 0.9)
+collision_mask = 94
 script = ExtResource("1_codhe")
 Speed = 150.0
 JumpVelocity = -300.0
 speedBullet = 250.0
 ammo = 5
 vida = 5
-vidaMax = 5
 
 [node name="Camera2D" type="Camera2D" parent="."]
 visibility_layer = 15
@@ -299,6 +337,7 @@ position = Vector2(0, 8)
 zoom = Vector2(3, 3)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 2
 texture_filter = 1
 position = Vector2(0, 15)
 sprite_frames = SubResource("SpriteFrames_nvcvm")
@@ -306,13 +345,56 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visibility_layer = 14
+visibility_layer = 30
 texture_filter = 1
 position = Vector2(0, 19)
 shape = SubResource("CapsuleShape2D_emoaq")
 
-[node name="ammo" type="Label" parent="."]
-offset_left = -272.857
-offset_top = -145.714
-offset_right = -170.857
-offset_bottom = -109.714
+[node name="HUD" type="Node2D" parent="."]
+
+[node name="healthSprite" type="Sprite2D" parent="HUD"]
+position = Vector2(-117.778, -90)
+scale = Vector2(2.88095, 2.88095)
+texture = SubResource("AtlasTexture_xmier")
+flip_h = true
+
+[node name="health" type="Label" parent="HUD/healthSprite"]
+offset_left = 7.43802
+offset_top = -9.71902
+offset_right = 26.438
+offset_bottom = 13.281
+scale = Vector2(0.8, 0.8)
+text = "99"
+
+[node name="monedasSprite" type="Sprite2D" parent="HUD"]
+position = Vector2(-32.2222, -92.2222)
+scale = Vector2(2.78571, 2.78571)
+texture = SubResource("AtlasTexture_6e4bk")
+flip_h = true
+
+[node name="monedas" type="Label" parent="HUD/monedasSprite"]
+offset_left = 6.0
+offset_top = -10.0
+offset_right = 35.0
+offset_bottom = 13.0
+scale = Vector2(0.8, 0.8)
+text = "999"
+
+[node name="ammoSprite" type="Sprite2D" parent="HUD"]
+position = Vector2(-193.333, -91.1111)
+texture = SubResource("AtlasTexture_c51x8")
+flip_h = true
+
+[node name="ammo" type="Label" parent="HUD/ammoSprite"]
+offset_left = 17.0
+offset_top = -26.0
+offset_right = 38.0
+offset_bottom = -3.0
+scale = Vector2(2.2, 2.2)
+text = "99"
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="HUD"]
+position = Vector2(194.444, -93.3333)
+sprite_frames = SubResource("SpriteFrames_killp")
+animation = &"supersalto"
+autoplay = "defecto"

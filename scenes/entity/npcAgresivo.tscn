@@ -1,0 +1,106 @@
+[gd_scene load_steps=13 format=3 uid="uid://dqrgpk0yovxq5"]
+
+[ext_resource type="Script" path="res://scripts/NpcAgresivo.cs" id="1_k4j4t"]
+[ext_resource type="Texture2D" uid="uid://bwoec51f6mei0" path="res://tilesets/slime_purple.png" id="2_eb1ij"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3beon"]
+atlas = ExtResource("2_eb1ij")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p827k"]
+atlas = ExtResource("2_eb1ij")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8h2mf"]
+atlas = ExtResource("2_eb1ij")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iwiel"]
+atlas = ExtResource("2_eb1ij")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ceqr"]
+atlas = ExtResource("2_eb1ij")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8q1xr"]
+atlas = ExtResource("2_eb1ij")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p03i4"]
+atlas = ExtResource("2_eb1ij")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3r3eg"]
+atlas = ExtResource("2_eb1ij")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mejkn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3beon")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p827k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8h2mf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iwiel")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ceqr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8q1xr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p03i4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3r3eg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iwiel")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8h2mf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p827k")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hje8o"]
+size = Vector2(16, 16)
+
+[node name="NpcAgresivo" type="Area2D"]
+script = ExtResource("1_k4j4t")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = -1
+texture_filter = 1
+position = Vector2(0, -11)
+sprite_frames = SubResource("SpriteFrames_mejkn")
+animation = &"idle"
+autoplay = "idle"
+frame = 6
+frame_progress = 0.240927
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visibility_layer = 14
+texture_filter = 1
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_hje8o")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0, -6)
+target_position = Vector2(-144, -1)
+
+[connection signal="area_entered" from="." to="." method="OnBodyEnteredBullet"]

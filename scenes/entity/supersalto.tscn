@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://by4wopwqbvf7b"]
+
+[ext_resource type="Script" path="res://scripts/Supersalto.cs" id="1_t70nu"]
+[ext_resource type="Texture2D" uid="uid://4kxcg6kqo2nw" path="res://tilesets/spritesheet_32x32.png" id="2_537h5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3xuoe"]
+atlas = ExtResource("2_537h5")
+region = Rect2(2, 126, 30, 30)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k4u1i"]
+radius = 7.0
+
+[node name="Supersalto" type="Area2D"]
+collision_layer = 64
+script = ExtResource("1_t70nu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-9.53674e-07, -2)
+scale = Vector2(0.366667, 0.366667)
+texture = SubResource("AtlasTexture_3xuoe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visibility_layer = 14
+texture_filter = 1
+shape = SubResource("CircleShape2D_k4u1i")
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]

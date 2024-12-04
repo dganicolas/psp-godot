@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="psp-godot-2425"
-run/main_scene="res://scenes/principal.tscn"
+run/main_scene="res://scenes/menu.tscn"
 config/features=PackedStringArray("4.3", "C#", "Mobile")
 config/icon="res://icon.svg"
 
@@ -77,6 +77,8 @@ teleport={
 2d_render/layer_4="Killzone"
 2d_render/layer_5="Balas"
 2d_render/layer_6="portales"
+2d_render/layer_7="Coleccionables"
+2d_render/layer_8="npc"
 
 [rendering]
 
