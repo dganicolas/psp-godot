@@ -56,7 +56,7 @@ public partial class Juego : Node2D
 	public void changeScene(String nivel){
 		if(nivel =="salir"){
 			var nextScene = ResourceLoader.Load<PackedScene>("res://scenes/despedida.tscn");
-		GetTree().ChangeSceneToPacked(nextScene);
+			GetTree().ChangeSceneToPacked(nextScene);
 		}else{
 			LoadScene(levelPaths[nivel]);
 		}

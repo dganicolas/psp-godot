@@ -12,7 +12,7 @@ public partial class Supersalto : Area2D
 	public override void _Ready()
 	{
 		timer = new Timer();
-		timer.WaitTime = 5.0f;
+		timer.WaitTime = 3.0f;
 		timer.OneShot = true;
 		timer.Timeout += OnTimerTimeout;
 		AddChild(timer);

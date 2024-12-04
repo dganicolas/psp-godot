@@ -150,7 +150,7 @@ z_index = -1
 z_index = -3
 position = Vector2(146, -8)
 textoMensaje = "presiona q para empezar la aventura"
-instruccion = "level6"
+instruccion = "level1"
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 light_mask = 2

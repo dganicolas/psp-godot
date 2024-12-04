@@ -173,7 +173,7 @@ position = Vector2(55, -6)
 [node name="portal" parent="." instance=ExtResource("9_ocbhy")]
 position = Vector2(-1174, -311)
 textoMensaje = "presion q para regresar"
-instruccion = "lobby"
+instruccion = "level4"
 
 [node name="Area2Dene2" parent="." instance=ExtResource("8_1vke8")]
 position = Vector2(289, -5)
