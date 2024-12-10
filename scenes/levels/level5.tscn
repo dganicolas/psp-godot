@@ -295,7 +295,7 @@ collision_visibility_mode = 1
 z_index = 5
 position = Vector2(1300, -8)
 textoMensaje = "presion q para regresar"
-instruccion = "boss"
+instruccion = "level6"
 
 [node name="Npc" parent="." instance=ExtResource("3_ueyj8")]
 position = Vector2(-3, -4)
