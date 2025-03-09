@@ -57,47 +57,8 @@ public partial class Player : CharacterBody2D
 		
 	}
 	
-	public void ReloadPlayer(Player clone)
-	{
-		clone.Speed = this.Speed;
-		clone.JumpVelocity = this.JumpVelocity;
-		clone.speedBullet = this.speedBullet;
-		clone.ammo = this.ammo;
-		clone.vida = this.vida;
-		clone.monedas = this.monedas;
-		clone.Position = this.Position;
-		clone.powerUps.Play("defecto");
-		
-	}
 	
-	public Player ClonePlayer()
-	{
-	Player clone = (Player)GD.Load<PackedScene>("res://scenes/entity/Player.tscn").Instantiate();
-	clone.Speed = this.Speed;
-	clone.JumpVelocity = this.JumpVelocity;
-	clone.speedBullet = this.speedBullet;
-	clone.ammo = this.ammo;
-	clone.vida = this.vida;
-	clone.monedas = this.monedas;
-	clone.Position = this.Position;
-	
-	if (clone.animation != null && this.animation != null)
-	{
-		clone.animation.Play(this.animation.Animation);
-		clone.animation.FlipH = this.animation.FlipH;
-	}
-	
-	if (clone.textammo != null && this.textammo != null)
-		clone.textammo.Text = this.textammo.Text;
-		
-	if (clone.texthealth != null && this.texthealth != null)
-		clone.texthealth.Text = this.texthealth.Text;
-		
-	if (clone.textmonedas != null && this.textmonedas != null)
-		clone.textmonedas.Text = this.textmonedas.Text;
-	return clone;
-	}
-	
+
 	public void recibirDinero(int cantidad){
 		monedas += cantidad;
 	}
@@ -130,22 +91,22 @@ public partial class Player : CharacterBody2D
 		}
 
 		
-		if (Input.IsActionJustPressed("fire"))
-		{
-				if(ammo > 0){
-					Bullet instBullet = (Bullet) bullet.Instantiate();
-					instBullet.Position = this.GlobalPosition + new Vector2(10, 15);
-					instBullet.RotationDegrees = animation.FlipH ? 180 : 0;
-					instBullet.speedBullet = animation.FlipH ? -speedBullet : speedBullet;
-					GetParent().AddChild(instBullet);
-					
-				GD.Print("Bala disparada en posición: " + instBullet.GlobalPosition);
-				ammo--;
-				}else{
-					GD.Print("no ammo");
-				}
-				updateAmmoDisplay();
-		}
+		//if (Input.IsActionJustPressed("fire"))
+		//{
+				//if(ammo > 0){
+					//Bullet instBullet = (Bullet) bullet.Instantiate();
+					//instBullet.Position = this.GlobalPosition + new Vector2(10, 15);
+					//instBullet.RotationDegrees = animation.FlipH ? 180 : 0;
+					//instBullet.speedBullet = animation.FlipH ? -speedBullet : speedBullet;
+					//GetParent().AddChild(instBullet);
+					//
+				//GD.Print("Bala disparada en posición: " + instBullet.GlobalPosition);
+				//ammo--;
+				//}else{
+					//GD.Print("no ammo");
+				//}
+				//updateAmmoDisplay();
+		//}
 		
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.

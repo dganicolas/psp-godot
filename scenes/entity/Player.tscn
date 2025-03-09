@@ -353,12 +353,14 @@ shape = SubResource("CapsuleShape2D_emoaq")
 [node name="HUD" type="Node2D" parent="."]
 
 [node name="healthSprite" type="Sprite2D" parent="HUD"]
+visible = false
 position = Vector2(-117.778, -90)
 scale = Vector2(2.88095, 2.88095)
 texture = SubResource("AtlasTexture_xmier")
 flip_h = true
 
 [node name="health" type="Label" parent="HUD/healthSprite"]
+visible = false
 offset_left = 7.43802
 offset_top = -9.71902
 offset_right = 26.438
@@ -381,11 +383,13 @@ scale = Vector2(0.8, 0.8)
 text = "999"
 
 [node name="ammoSprite" type="Sprite2D" parent="HUD"]
+visible = false
 position = Vector2(-193.333, -91.1111)
 texture = SubResource("AtlasTexture_c51x8")
 flip_h = true
 
 [node name="ammo" type="Label" parent="HUD/ammoSprite"]
+visible = false
 offset_left = 17.0
 offset_top = -26.0
 offset_right = 38.0
@@ -394,6 +398,7 @@ scale = Vector2(2.2, 2.2)
 text = "99"
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="HUD"]
+visible = false
 position = Vector2(194.444, -93.3333)
 sprite_frames = SubResource("SpriteFrames_killp")
 animation = &"supersalto"

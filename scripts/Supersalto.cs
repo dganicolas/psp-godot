@@ -6,13 +6,13 @@ public partial class Supersalto : Area2D
 	private Timer timer;
 	private float salto;
 	[Export]
-	private float saltoPotenciado  { get; set; }
+	private float saltoPotenciado = 250;
 	private Player player;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		timer = new Timer();
-		timer.WaitTime = 3.0f;
+		timer.WaitTime = 1.5f;
 		timer.OneShot = true;
 		timer.Timeout += OnTimerTimeout;
 		AddChild(timer);
@@ -24,16 +24,16 @@ public partial class Supersalto : Area2D
 	{
 	}
 	public void OnBodyEntered(Player body){
-		salto = body.JumpVelocity;
+		salto = body.Speed;
 		body.powerUps.Play("supersalto");
-		body.JumpVelocity = saltoPotenciado;
+		body.Speed = saltoPotenciado;
 		this.Visible=false;
 		timer.Start();
 	}
 	private void OnTimerTimeout()
 	{
 		player.powerUps.Play("defecto");
-		player.JumpVelocity = salto;
+		player.Speed = salto;
 		this.QueueFree();
 	}
 }

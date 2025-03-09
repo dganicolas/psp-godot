@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Killzone : Area2D
+public partial class HttpRequest : Godot.HttpRequest
 {
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -12,6 +12,4 @@ public partial class Killzone : Area2D
 	public override void _Process(double delta)
 	{
 	}
-	
-	
 }

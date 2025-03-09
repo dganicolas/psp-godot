@@ -32,7 +32,6 @@ public partial class Juego : Node2D
 		levelManager = GetTree().Root.GetNode<LevelManager>("/root/Juego/LevelManager");
 		player = GetTree().Root.GetNode<Player>("/root/Juego/CharacterBody2D");
 		texto = GetTree().Root.GetNode<TextEdit>("/root/Juego/TextEdit");
-		playerBackup = player.ClonePlayer();
 		levelManager.LoadScene(levelPaths["lobby"]);
 	}
 
@@ -42,15 +41,12 @@ public partial class Juego : Node2D
 		if(player.vida == 0) ReloadScene();
 	}
 	private void ReloadPlayer(){
-	playerBackup.ReloadPlayer(player);
 	player.GlobalPosition = new Vector2(-57, -19);
 	}
 	
 	public void LoadScene(string scenePath){
 		player.GlobalPosition = new Vector2(-57,-19);
 		playerBackup.QueueFree();
-		playerBackup = player.ClonePlayer();
-		levelManager.LoadScene(scenePath);
 	}
 	
 	public void changeScene(String nivel){
