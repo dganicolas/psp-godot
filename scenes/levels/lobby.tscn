@@ -433,6 +433,9 @@ position = Vector2(1927, -55)
 
 [node name="Timer" type="Timer" parent="."]
 
+[node name="Moneda67" parent="." instance=ExtResource("4_kxquw")]
+position = Vector2(-119, -103)
+
 [connection signal="pressed" from="CharacterBody2D/BtnEnviarSolicitud" to="." method="OnBtnEnviarSolicitudPressed"]
 [connection signal="pressed" from="CharacterBody2D/btnGuardaNombre" to="." method="OnBtnGuardarNombrePressed"]
 [connection signal="body_entered" from="Area2D" to="." method="OnBodyEnteredKillzone"]
